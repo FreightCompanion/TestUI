@@ -1,5 +1,12 @@
 import React, { useState, useMemo } from "react";
-import { HashRouter, Routes, Route, Link, useLocation, useSearchParams } from "react-router-dom";
+import {
+  HashRouter,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 // Icons removed to avoid lucide-react dependency
 // import { LayoutDashboard, TableProperties } from "lucide-react";
 
@@ -16,7 +23,6 @@ const NavLink = ({ to, label }) => {
           : "text-slate-500 hover:text-[#1A2B49] hover:bg-slate-100")
       }
     >
-      {/* Simple text badge instead of icon */}
       <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-slate-200 text-[10px] font-bold text-slate-700">
         {label[0]}
       </span>
@@ -26,7 +32,8 @@ const NavLink = ({ to, label }) => {
 };
 
 const MainContent = () => {
-  const { Dashboard, OpportunityManager, DetailPanel, DateFilter, INITIAL_DATA } = window;
+  const { Dashboard, OpportunityManager, DetailPanel, DateFilter, INITIAL_DATA } =
+    window;
 
   const [opportunities, setOpportunities] = useState(INITIAL_DATA);
   const [selectedOpp, setSelectedOpp] = useState(null);
@@ -48,16 +55,17 @@ const MainContent = () => {
     setIsPanelOpen(true);
   };
 
-  // 1. Base Filter: Date Range
   const dateFilteredOpportunities = useMemo(() => {
     return opportunities.filter((opp) => {
       if (!dateRange.start || !dateRange.end) return true;
       const closeDate = new Date(opp.close_date);
-      return closeDate >= dateRange.start && closeDate <= dateRange.end;
+      return (
+        closeDate >= dateRange.start &&
+        closeDate <= dateRange.end
+      );
     });
   }, [opportunities, dateRange]);
 
-  // 2. Drill-Down Filter: URL Params
   const drillDownOpportunities = useMemo(() => {
     let filtered = [...dateFilteredOpportunities];
 
@@ -88,7 +96,6 @@ const MainContent = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-[#1A2B49]">
-      {/* Top Navigation */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -99,7 +106,6 @@ const MainContent = () => {
               </span>
             </div>
 
-            {/* Date Slicer Filter integrated in Header */}
             <div className="hidden md:block">
               <DateFilter
                 onFilterChange={(start, end) => setDateRange({ start, end })}
@@ -113,7 +119,6 @@ const MainContent = () => {
           </nav>
         </div>
 
-        {/* Mobile Date Filter */}
         <div className="md:hidden p-2 border-t border-slate-100 flex justify-center bg-slate-50">
           <DateFilter
             onFilterChange={(start, end) => setDateRange({ start, end })}
@@ -121,7 +126,6 @@ const MainContent = () => {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto py-8">
         <Routes>
           <Route
@@ -140,7 +144,6 @@ const MainContent = () => {
         </Routes>
       </main>
 
-      {/* Slide-out Edit Panel */}
       <DetailPanel
         opportunity={selectedOpp}
         isOpen={isPanelOpen}
@@ -151,12 +154,11 @@ const MainContent = () => {
   );
 };
 
-const App = () => {
-  return (
-    <HashRouter>
-      <MainContent />
-    </HashRouter>
-  );
-};
+const App = () => (
+  <HashRouter>
+    <MainContent />
+  </HashRouter>
+);
 
+// Critical: expose App on window so index.js can render it
 window.App = App;
