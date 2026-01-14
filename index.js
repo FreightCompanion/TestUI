@@ -2,11 +2,12 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 // App was attached to window in App.js
+const container = document.getElementById("root");
 const App = window.App;
 
-const container = document.getElementById("root");
+console.log("container:", container);
+console.log("window.App:", App);
 
-// Basic safety check
 if (!container) {
   console.error("Root container #root not found");
 } else if (!App) {
