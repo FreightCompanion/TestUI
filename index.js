@@ -1,16 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
-}
-
+// App was attached to window in App.js
 const App = window.App;
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const container = document.getElementById("root");
+
+// Basic safety check
+if (!container) {
+  console.error("Root container #root not found");
+} else if (!App) {
+  console.error("window.App is not defined");
+} else {
+  const root = createRoot(container);
+  root.render(<App />);
+}
