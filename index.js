@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-// App was attached to window in App.js
+// App is attached to window in App.js
 const container = document.getElementById("root");
 const App = window.App;
 
