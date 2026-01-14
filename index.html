@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FuZ Command Center</title>
+
+    <!-- Tailwind for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Babel for in-browser JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      body {
+        background-color: #F8FAFC; /* Ghost White / Off-White */
+        color: #1A2B49; /* Deep Navy */
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #CBD5E1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94A3B8;
+      }
+    </style>
+
+    <!-- Import map: all libraries pinned to React 18 -->
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "lucide-react": "https://esm.sh/lucide-react@0.292.0?deps=react@18.2.0",
+    "@google/genai": "https://esm.sh/@google/genai@0.1.1",
+    "recharts": "https://esm.sh/recharts@2.10.3?deps=react@18.2.0,react-dom@18.2.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.20.0?deps=react@18.2.0,react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+
+    <!-- Shim process.env for browser compatibility -->
+    <script>
+      window.process = {
+        env: {
+          API_KEY: "" // insert your key here if you need it in the browser
+        }
+      };
+    </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+  <body>
+    <div id="root"></div>
+
+   <!-- 1. Load Constants & Services -->
+<script type="text/babel" data-type="module" src="./constants.js"></script>
+<script type="text/babel" data-type="module" src="./services/geminiService.js"></script>
+
+<!-- 2. Load Components -->
+<script type="text/babel" data-type="module" src="./components/DateFilter.js"></script>
+<script type="text/babel" data-type="module" src="./components/DetailPanel.js"></script>
+<script type="text/babel" data-type="module" src="./components/OpportunityManager.js"></script>
+<script type="text/babel" data-type="module" src="./components/Dashboard.js"></script>
+
+<!-- 3. Load App & Entry Point -->
+<script type="text/babel" data-type="module" src="./App.js"></script>
+<script type="text/babel" data-type="module" src="./index.js"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
