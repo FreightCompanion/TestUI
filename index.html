@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FuZ Command Center</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FuZ Command Center</title>
 
-    <!-- Tailwind for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Babel for in-browser JSX/ESNext transformation -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Babel for in-browser JSX/ESNext transformation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <style>
-      body {
-        background-color: #F8FAFC;
-        color: #1A2B49;
-      }
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #CBD5E1;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94A3B8;
-      }
-    </style>
-
-    <!-- Import map: React 18 + React Router DOM -->
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@18.2.0",
-        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-        "react-dom": "https://esm.sh/react-dom@18.2.0",
-        "react-router-dom": "https://esm.sh/react-router-dom@6.20.0?deps=react@18.2.0,react-dom@18.2.0"
-      }
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #1A2B49;
     }
-    </script>
-  </head>
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
 
-  <body>
-    <div id="root"></div>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.2.0",
+      "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+      "react-dom": "https://esm.sh/react-dom@18.2.0",
+      "react-router-dom": "https://esm.sh/react-router-dom@6.20.0?deps=react@18.2.0,react-dom@18.2.0",
+      "lucide-react": "https://esm.sh/lucide-react@0.292.0?deps=react@18.2.0"
+    }
+  }
+  </script>
+</head>
 
-    <!-- App files that exist in the repo root -->
-    <script type="text/babel" data-type="module" src="./constants.js"></script>
-    <script type="text/babel" data-type="module" src="./App.js"></script>
-    <script type="text/babel" data-type="module" src="./index.js"></script>
-  </body>
+<body>
+  <div id="root"></div>
+
+  <!-- App files that exist in the repo root -->
+  <script type="text/babel" data-type="module" src="./constants.js"></script>
+  <script type="text/babel" data-type="module" src="./App.js"></script>
+  <script type="text/babel" data-type="module" src="./index.js"></script>
+</body>
 </html>
