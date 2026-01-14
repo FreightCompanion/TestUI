@@ -7,9 +7,27 @@ import {
   useLocation,
   useSearchParams,
 } from "react-router-dom";
-// Icons removed to avoid lucide-react dependency
-// import { LayoutDashboard, TableProperties } from "lucide-react";
 
+// Temporary stubs so the app has something to render
+const Dummy = ({ label }) => (
+  <div className="p-8 text-center text-slate-600">
+    {label} component not wired yet.
+  </div>
+);
+
+window.Dashboard = window.Dashboard || ((props) => <Dummy label="Dashboard" />);
+window.OpportunityManager =
+  window.OpportunityManager ||
+  ((props) => <Dummy label="Opportunity Manager" />);
+window.DetailPanel =
+  window.DetailPanel ||
+  ((props) => null); // or <Dummy label="Detail Panel" />
+window.DateFilter =
+  window.DateFilter ||
+  ((props) => <div className="text-sm text-slate-500">Date filter here</div>);
+window.INITIAL_DATA = window.INITIAL_DATA || [];
+
+// Simple nav link (no external icon library)
 const NavLink = ({ to, label }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
@@ -32,8 +50,13 @@ const NavLink = ({ to, label }) => {
 };
 
 const MainContent = () => {
-  const { Dashboard, OpportunityManager, DetailPanel, DateFilter, INITIAL_DATA } =
-    window;
+  const {
+    Dashboard,
+    OpportunityManager,
+    DetailPanel,
+    DateFilter,
+    INITIAL_DATA,
+  } = window;
 
   const [opportunities, setOpportunities] = useState(INITIAL_DATA);
   const [selectedOpp, setSelectedOpp] = useState(null);
@@ -55,17 +78,16 @@ const MainContent = () => {
     setIsPanelOpen(true);
   };
 
+  // 1. Base Filter: Date Range
   const dateFilteredOpportunities = useMemo(() => {
     return opportunities.filter((opp) => {
       if (!dateRange.start || !dateRange.end) return true;
       const closeDate = new Date(opp.close_date);
-      return (
-        closeDate >= dateRange.start &&
-        closeDate <= dateRange.end
-      );
+      return closeDate >= dateRange.start && closeDate <= dateRange.end;
     });
   }, [opportunities, dateRange]);
 
+  // 2. Drill-Down Filter: URL Params
   const drillDownOpportunities = useMemo(() => {
     let filtered = [...dateFilteredOpportunities];
 
@@ -96,6 +118,7 @@ const MainContent = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-[#1A2B49]">
+      {/* Top Navigation */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -106,6 +129,7 @@ const MainContent = () => {
               </span>
             </div>
 
+            {/* Date filter in header */}
             <div className="hidden md:block">
               <DateFilter
                 onFilterChange={(start, end) => setDateRange({ start, end })}
@@ -119,6 +143,7 @@ const MainContent = () => {
           </nav>
         </div>
 
+        {/* Mobile Date Filter */}
         <div className="md:hidden p-2 border-t border-slate-100 flex justify-center bg-slate-50">
           <DateFilter
             onFilterChange={(start, end) => setDateRange({ start, end })}
@@ -126,6 +151,7 @@ const MainContent = () => {
         </div>
       </header>
 
+      {/* Main Content */}
       <main className="max-w-7xl mx-auto py-8">
         <Routes>
           <Route
@@ -144,6 +170,7 @@ const MainContent = () => {
         </Routes>
       </main>
 
+      {/* Slide-out Edit Panel */}
       <DetailPanel
         opportunity={selectedOpp}
         isOpen={isPanelOpen}
@@ -160,5 +187,5 @@ const App = () => (
   </HashRouter>
 );
 
-// Critical: expose App on window so index.js can render it
+// Expose App so index.js can render it
 window.App = App;
